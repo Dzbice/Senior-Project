@@ -43,6 +43,23 @@ class Cube:
         self.CubeRotL[0, :, :] = self.FC
         self.cube = self.CubeRotL
 
+    def move(self,face,clockwise = False):
+        self. CubeRot = np.copy(self.cube)
+        match face:
+            case "L":
+                self.FC = self.CubeRot[0, :, :]
+            case "R":
+                self.FC = self.CubeRot[2, :, :]
+        if not clockwise:
+            self.FC = np.rot90(self.FC, 1, (1,0))
+        else:
+            self.FC = np.rot90(self.FC, 1, (0,1))
+        match face:
+            case "L":
+                self.CubeRot[0, :, :] = self.FC
+            case "R":
+                self.CubeRot[2, :, :] = self.FC
+        self.cube = self.CubeRot
     def print_Cube(self):
         for z in range(3):
             for y in range(3):
@@ -53,6 +70,7 @@ class Cube:
 if __name__ == "__main__":
     cube = Cube()
     cube.print_Cube()
-    print("L")
-    cube.Lmove()
+    print("LR")
+    cube.move("R")
+    cube.move("L",True)
     cube.print_Cube()
