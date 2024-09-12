@@ -11,9 +11,9 @@ class Cube():
     
     
     def make_cube(self):
-        for y in range(3):
-            for x in range(3):
-                for z in range(3):
+        for z in range(3):
+            for y in range(3):
+                for x in range(3):
                     colors = {}
                     match x:  # Left and Right sides
                         case 0:
@@ -31,11 +31,29 @@ class Cube():
                         case 2: 
                             colors['B'] = 'B'
                     self.cube[x,y,z] = Piece(colors)
+                    
+                    
+                    
+    def Lmove(self,clockwise = False):
+        self.CubeRotL = np.copy(self.cube)
+        self.FC = self.CubeRotL[0,:,:]
+        if not clockwise:
+            self.FC = np.rot90(self.FC,1,(0,1))
+        else:
+            self.FC = np.rot90(self.FC,1,(1,0))
+        self.CubeRotL[0,:,:] = self.FC
+        self.cube = self.CubeRotL
+        
     def print_Cube(self):
+        
         for z in range(3):
-            for x in range(3):
-                print([self.cube[x,y,z ].colors for y in range(3)])
+            for y in range(3):
+                print([self.cube[x,y,z].colors for x in range(3)])
             print()
 
 if __name__== '__main__':
     cube = Cube()
+    cube.print_Cube()
+    print("L")
+    cube.Lmove()
+    cube.print_Cube()
