@@ -42,6 +42,8 @@ class Piece:
         print(self.colors)
              
                         
+             
+                        
 
 
 class Cube:
@@ -57,24 +59,32 @@ class Cube:
                     match x:  # Left and Right sides
                         case 0:
                             colors["Left"] = "R"
+                            colors["Left"] = "R"
                         case 2:
+                            colors["Right"] = "O"
                             colors["Right"] = "O"
                     match y:  # Top and bottom
                         case 0:
                             colors["Up"] = "Y"
+                            colors["Up"] = "Y"
                         case 2:
+                            colors["Down"] = "W"
                             colors["Down"] = "W"
                     match z:  # front and back
                         case 0:
                             colors["Front"] = "G"
+                            colors["Front"] = "G"
                         case 2:
+                            colors["Back"] = "B"
                             colors["Back"] = "B"
                     self.cube[x, y, z] = Piece(colors)
 
     def move(self,face,clockwise = True):
+    def move(self,face,clockwise = True):
         self. CubeRot = np.copy(self.cube)
         match face:
             case "L":
+                clockwise = False
                 clockwise = False
                 self.FC = self.CubeRot[0, :, :]
             case "R":
@@ -83,10 +93,12 @@ class Cube:
                 self.FC = self.CubeRot[:,0,:]
             case "D":
                 clockwise = False
+                clockwise = False
                 self.FC = self.CubeRot[:,2,:]
             case "F":
                 self.FC = self.CubeRot[:,:,0]
             case "B":
+                clockwise = False
                 clockwise = False
                 self.FC = self.CubeRot[:,:,2]
         if not clockwise:
@@ -107,6 +119,9 @@ class Cube:
                         piece.movePiece(clockwise,face)
             case "U":
                 self.CubeRot[:,0,:]=self.FC 
+                for i in self.CubeRot[:,0,:]:
+                    for piece in i:
+                        piece.movePiece(clockwise,face)
                 for i in self.CubeRot[:,0,:]:
                     for piece in i:
                         piece.movePiece(clockwise,face)
@@ -133,6 +148,8 @@ class Cube:
             print()
     def print_piece(self,piece):
         print(self.cube[piece[0],piece[1],piece[2]].colors)
+    def print_piece(self,piece):
+        print(self.cube[piece[0],piece[1],piece[2]].colors)
 
 
 if __name__ == "__main__":
@@ -140,7 +157,12 @@ if __name__ == "__main__":
     cube.print_Cube()
     print("space")
     cube.move("U",True)
+    print("space")
+    cube.move("U",True)
     cube.print_Cube()
+    print("space")
+    cube.print_piece([1,2,2])
+
     print("space")
     cube.print_piece([1,2,2])
 
