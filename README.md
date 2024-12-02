@@ -4,3 +4,5 @@ As of writing this, it's techinically completeded, but there are some problems a
 The main problem being it takes a very long time to run, so while it theoretically works, it coming through a very very large amount of possibilities. 
 Just as an example because I don't know exactly how many, the rubiks cubes has roughly 43 quintillion possibilities in it
 i.e 4*10^19
+
+As well as the fact that this entire thing needs to look more professional and things of that nature. And extra things I plan to add or change possibly. 

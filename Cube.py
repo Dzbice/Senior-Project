@@ -80,7 +80,6 @@ class Cube:
                     self.cube[x, y, z] = Piece(colors)
 
     def move(self,face,clockwise = True):
-    def move(self,face,clockwise = True):
         self. CubeRot = np.copy(self.cube)
         match face:
             case "L":
@@ -146,8 +145,6 @@ class Cube:
             for y in range(3):
                 print([self.cube[x, y, z].colors for x in range(3)])
             print()
-    def print_piece(self,piece):
-        print(self.cube[piece[0],piece[1],piece[2]].colors)
     def print_piece(self,piece):
         print(self.cube[piece[0],piece[1],piece[2]].colors)
 
