@@ -1,4 +1,5 @@
 import numpy as np
+import collections
 
 
 class Piece:
@@ -30,12 +31,13 @@ class Piece:
             "F": ["U","R","D","L"],
             "B": ["U","R","D","L"]
         }
-        colors = list(self.colors.values)
+        colors = list(self.colors.values())
         facesides = sides[face]
         if clockwise: 
-            facesides = facesides[1:] + facesides[0]
+            print("we",facesides[1:], facesides[0:1])
+            facesides = facesides[1:] + facesides[0:1]
         else:
-            facesides = facesides[-1] + facesides[0:2]
+            facesides = facesides[-1:-2] + facesides[0:2]
         self.colors = dict(zip(sides,colors))
         print(self.colors)
              
@@ -97,12 +99,12 @@ class Cube:
                 self.CubeRot[0, :, :] = self.FC
                 for i in self.CubeRot[0]:
                     for piece in i:
-                        piece.movePiece(clockwise)
+                        piece.movePiece(clockwise,face)
             case "R":
                 self.CubeRot[2, :, :] = self.FC
                 for i in self.CubeRot[2]:
                     for piece in i:
-                        piece.movePiece(clockwise)
+                        piece.movePiece(clockwise,face)
             case "U":
                 self.CubeRot[:,0,:]=self.FC 
                 for i in self.CubeRot[:,0,:]:
@@ -112,17 +114,17 @@ class Cube:
                 self.CubeRot[:,2,:]=self.FC
                 for i in self.CubeRot[:,2:,]:
                     for piece in i:
-                        piece.movePiece(clockwise)
+                        piece.movePiece(clockwise,face)
             case "F":
                 self.CubeRot[:,:,0] = self.FC
                 for i in self.CubeRot[:,:,0]:
                     for piece in i:
-                        piece.movePiece(clockwise)
+                        piece.movePiece(clockwise,face)
             case "B":
                 self.CubeRot[:,:,2] = self.FC
                 for i in self.CubeRot[:,:,0]:
                     for piece in i:
-                        piece.movePiece(clockwise)
+                        piece.movePiece(clockwise,face)
         self.cube = self.CubeRot
     def print_Cube(self):
         for z in range(3):
