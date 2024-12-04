@@ -57,23 +57,25 @@ class Cube:
                             colors["Back"] = "B"
                     self.cube[x, y, z] = Piece(colors)
 
-    def move(self, face, clockwise=True):
+    def move(self, face, clockwise=None):
+        if clockwise is None:
+            clockwise = True
         self.CubeRot = np.copy(self.cube)
         match face:
             case "L":
-                clockwise = False
+                clockwise = not clockwise
                 self.FC = self.CubeRot[0, :, :]
             case "R":
                 self.FC = self.CubeRot[2, :, :]
             case "U":
                 self.FC = self.CubeRot[:, 0, :]
             case "D":
-                clockwise = False
+                clockwise = not clockwise
                 self.FC = self.CubeRot[:, 2, :]
             case "F":
                 self.FC = self.CubeRot[:, :, 0]
             case "B":
-                clockwise = False
+                clockwise = not clockwise
                 self.FC = self.CubeRot[:, :, 2]
 
         # Rotate the slice (FC) either clockwise or counter-clockwise
@@ -183,7 +185,6 @@ def solve_cube(cube):
             break
 
         for face in ["U", "D", "L", "R", "F", "B"]:
-            print(f"Current Moves: {moves}")
             for clockwise in [False,True]:
 
                 new_cube = copy.deepcopy(current_cube)
@@ -222,31 +223,10 @@ if __name__ == "__main__":
     cube.print_Cube()
     cube.move("R")
     cube.move("U")
-    cube.move("U")
     cube.move("F")
-    cube.move("U",False)
-    cube.move("D")
-    cube.move("F")
-    cube.move("F")
-    cube.move("R")
-    cube.move("R")
     cube.move("B")
-    cube.move("B")
-    cube.move("L")
-    cube.move("U")
-    cube.move("U")
-    cube.move("F",False)
-    cube.move("B",False)
-    cube.move("U")
-    cube.move("R")
-    cube.move("R")
-    cube.move("D")
-    cube.move("F")
-    cube.move("F")
-    cube.move("R")
-    cube.move("R")
-    cube.move("R")
-    cube.move("U")
+    cube.move("D",False)
+
     
     print("Solving the cube...")
     solution = solve_cube(cube)
