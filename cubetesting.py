@@ -255,3 +255,6 @@ if __name__ == "__main__":
     print("Solution:", solution)
     end = time.perf_counter()
     print(end-start)
+
+
+# for entering moves, seperate moves by a space, call to dictionary of moves(that's O(1) right?)
